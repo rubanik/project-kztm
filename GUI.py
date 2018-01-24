@@ -3,7 +3,7 @@
 import tkinter as tk
 import socket
 import client2copy
-
+####
 #Название станка
 NAME_OF_MACHINE = "ДИП-500"
 
