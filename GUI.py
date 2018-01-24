@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import tkinter as tk
-import  threading
 import socket
 import client2copy
 
@@ -94,20 +93,12 @@ buttonAccept.bind('<Button-1>',acceptData)
 conn_FLAG = False
 host = '127.0.0.1'
 port = 5560
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-
-# testList = []
-# testStr = "Привет, это тэстовое сообщение. Проверяем заполняемость окна и работу скрола!!"
-# for t in range(200):
-#     testList.append(testStr)
-
 
 
 menu = tk.Menu(root)
 root.config(menu=menu)
 cmd = ''
-#root.wm_attributes('-alpha',0.5)
+#root.wm_attributes('-alpha',0.5) #прозрачность
 
 
 
@@ -330,14 +321,7 @@ stopButton.place(x = 8,y=5)
 #startButton.bind('<Button-1>', start_operation)
 root.update_idletasks()
 
-root.update_idletasks()
-###################################################################################################################
-# if (not conn_FLAG):
-#     connection_thread = threading.Thread(target=start_connection,args=(host,port,sock))
-#     connection_thread.daemon =True
-#     connection_thread.start()
-#     conn_FLAG=True
-#     client2copy.aaa = 'wait'
+
 
 
 root.mainloop()
