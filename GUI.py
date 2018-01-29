@@ -8,8 +8,8 @@ import client2copy
 NAME_OF_MACHINE = "ДИП-500"
 
 
-def start_operation(event):
-    client2copy.aaa = 'start'
+
+
 
 def start_connection(host, port,sock ):
     sock.connect((host, port))
@@ -27,7 +27,11 @@ def acceptData(event):
         allDataList[3] = norm
         dataWindow.withdraw()
         startButton.config(state="normal")
-        listLog.insert('end','Данные приняты! Оператор: %s, Заказ: %s, Время на исполнение: %s.'% (str(operator),str(order),str(norm)))
+        listLog.insert('end','Данные приняты!'
+                             ' Оператор: %s, Заказ: %s,'
+                             ' Время на исполнение: %s.' % (str(operator),str(order),str(norm)))
+        textOperator.config(text = 'Оператор: %s' % allDataList[1])
+        textOrderL.config(text = 'Номер заказа: %s' % allDataList[2])
         print(allDataList)
     if operator == "Выбрать...":
         optMenu.configure(bg='pink')
@@ -43,15 +47,30 @@ def acceptData(event):
         textOrder1.configure(bg='lightgreen')
 
 def start(event):
-    print('BOOM')
-   # collect_array(cmd, arr)
+
+    print('{')
+    cmd = 'start'
+    client2copy.arrCollect(cmd, allDataList)
+    print("}")
+
+    stateLabel.config(text=allDataList[7])
+    startLog = ("Заказ №%s ,"
+                " дата начала работы - %s,"
+                " расч. дата окончания - %s"
+                % (str(allDataList[2]),str(allDataList[4]), str(allDataList[5])))
+    listLog.insert('end',startLog)
+    print(allDataList)
+
+    startButton.config(state = 'disabled')
+    pauseButton.config(state = 'normal')
+    stopButton.config(state = 'normal')
+
 
 #Тут мы создаем и заполняем основной список данных пустыми полями
 x=''
 allDataList= [x for i in range(13)]
 allDataList[0] = NAME_OF_MACHINE
 print(allDataList)
-
 
 #Главное окно
 root = tk.Tk()
@@ -217,6 +236,11 @@ mainDataFrame = tk.LabelFrame(root,
                            labelanchor = 'nw',
                            width =517,
                            height =322)
+s = tk.StringVar()
+s.set("Оператор: %s" % allDataList[1])
+textOperator = tk.Label(mainDataFrame)
+textOrderL = tk.Label(mainDataFrame)
+
 
 ###############################################################
 #         ОБЛАСТЬ С КНОПКОЙ СТАРТ
@@ -290,6 +314,8 @@ timerLabel.place(x=0,y=0)
 #  MAIN DATA
 
 mainDataFrame.place(x=10, y=91)
+textOperator.place(x=10,y=10)
+textOrderL.place(x=10, y = 40)
 #########################################
 # LOG
 logFrame.place(x=10, y=425)
